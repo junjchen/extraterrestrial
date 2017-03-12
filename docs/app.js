@@ -1,6 +1,5 @@
 window.EventFinderApp = (function($, eff) {
 	// TODO: check arguments is not undefined
-
 	return function(root) {
 		var x0 = -10,
 			x1 = 10,
@@ -33,41 +32,72 @@ window.EventFinderApp = (function($, eff) {
 			}
 			$boxes.append($row)
 		}
-
 		$app.append($boxes)
+
+		// a detail box to show information
+		var $detail = $('<dl/>', { class: 'detail' })
+		var $name = $('<dd/>', { class: 'detail__name' })
+		var $cheapest = $('<dd/>', { class: 'detail__cheapest' })
+		var $distance = $('<dd/>', { class: 'detail__distance' })
+		$detail.append($name)
+			.append($cheapest)
+			.append($distance)
+			.appendTo($boxes)
 
 		var onCellClick = (function onCellClick() {
 			var $prevCell, $prevHighlights = []
 			return function handle(e) {
-				var $cell = $(e.target)
-				if ($prevCell !== $cell) {
-					var evts = ef([$cell.data('x'), $cell.data('y')])
+				var $currCell = $(e.target)
+				if ($prevCell !== $currCell) {
+					var evts = ef([$currCell.data('x'), $currCell.data('y')])
 					var $highlights = evts.map(function(evt) {
-						return $boxes.find(':nth-child(' + (evt.y + 1) + ')')
-							.find(':nth-child(' + (evt.x + 1) + ')')
+						return $boxes.children(':nth-child(' + (evt.y + 1) + ')')
+							.children(':nth-child(' + (evt.x + 1) + ')')
+							.data('evt', evt)
 					})
-					unhighlight($prevCell, $prevHighlights)
-					highlight($cell, $highlights)
-					$prevCell = $cell
+					$prevCell && $prevCell.removeClass('boxes__cell--origin')
+					$currCell.addClass('boxes__cell--origin')
+					// remove highlights for elments nolonger should be highlighted
+					$($prevHighlights)
+						.not($highlights)
+						.get()
+						.forEach(function($h) {
+							$h.removeClass('boxes__cell--highlight')
+						})
+					// highlight elments
+					$($highlights)
+						.not($prevHighlights)
+						.get()
+						.forEach(function($h) {
+							$h.addClass('boxes__cell--highlight')
+						})
+					$prevCell = $currCell
 					$prevHighlights = $highlights
 				}
 			}
 		})()
+
+		function onMouseOver(e) {
+			var $cell = $(e.target),
+				evt = $cell.data('evt'),
+				pos = $cell.position()
+			$boxes.addClass('boxes--fade')
+			$detail.addClass('detail--show').css({
+				top: pos.top,
+				left: pos.left + 40
+			})
+			$name.text(evt.name)
+			$distance.text('distance ' + evt.distance)
+			$cheapest.text('$' + evt.cheapest.price)
+		}
+
+		function onMouseOut() {
+			$detail.removeClass('detail--show')
+			$boxes.removeClass('boxes--fade')
+		}
+
 		$boxes.on('click', '.boxes__cell', onCellClick)
-
-		function unhighlight($origin, $highlights) {
-			$origin && $origin.removeClass('boxes__cell--origin')
-			$highlights.forEach(function(h) {
-				h.removeClass('boxes__cell--highlight')
-			})
-		}
-
-		function highlight($origin, $highlights) {
-			$origin.addClass('boxes__cell--origin')
-			$highlights.forEach(function(h) {
-				h.addClass('boxes__cell--highlight')
-			})
-		}
-
+		$boxes.on('mouseover', '.boxes__cell--highlight', onMouseOver)
+		$boxes.on('mouseout', '.boxes__cell--highlight', onMouseOut)
 	}
 })(jQuery, EventFinderFactory)

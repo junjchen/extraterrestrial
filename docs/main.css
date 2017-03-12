@@ -1,6 +1,46 @@
-.boxes {
+html {
+	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body {
+	display: flex;
+}
+
+header {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 1100px;
+}
+
+footer {
+	margin: 35px 0 0 0;
+	background-color: #37474F;
+	flex-grow: 1;
+}
+
+
+/*boxes styles*/
+
+.boxes {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+.boxes--fade .boxes__cell:not(:hover) {
+	opacity: 0;
 }
 
 .boxes__row {
@@ -10,29 +50,95 @@
 }
 
 .boxes__cell {
+	display: flex;
+	justify-content: center;
 	width: 25px;
 	height: 25px;
 	border-radius: 50%;
 	margin: 5px;
-	background-color: #B0BEC5;
+	background-color: #F5F5F5;
+	border: 1px solid #CFD8DC;
+	opacity: 1;
+	transition: background-color 0.25s ease-out;
 }
 
 .boxes__cell--origin {
 	background-color: #F06292;
+	border: 1px solid #EC407A;
+	animation: 0.2s jelly
 }
 
 .boxes__cell--highlight {
 	background-color: #7986CB;
+	border: 1px solid #5C6BC0;
 }
 
 .boxes__cell--origin.boxes__cell--highlight {
 	background-color: #F06292;
-	width: 15px;
-	height: 15px;
 	border: solid 5px #7986CB;
 }
 
 .boxes__cell:hover {
 	cursor: pointer;
-	background-color: #F8BBD0;
+	background-color: #CFD8DC;
+}
+
+.boxes__cell--highlight:hover {
+	background-color: #5C6BC0;
+}
+
+.boxes__cell--origin:hover {
+	background-color: #EC407A;
+}
+
+
+/*detail styles*/
+
+.detail {
+	position: absolute;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	margin: 0;
+	width: 250px;
+	height: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0 25px;
+	transition: opacity 0.25s ease-out;
+	opacity: 0;
+	z-index: -1;
+}
+
+.detail--show {
+	opacity: 1;
+}
+
+.detail__name {
+	margin: 0;
+	color: #5C6BC0;
+	font-size: 2rem;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.detail__cheapest {
+	margin: 0;
+	text-transform: uppercase;
+}
+
+.detail__distance {
+	margin: 0;
+	text-transform: uppercase;
+}
+
+@keyframes jelly {
+	0% {
+		-webkit-transform: scale(1.0);
+	}
+	65% {
+		-webkit-transform: scale(1.2);
+	}
+	100% {
+		-webkit-transform: scale(1.0);
+	}
 }
