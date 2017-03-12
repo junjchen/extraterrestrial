@@ -150,18 +150,24 @@ describe('lib', () => {
 						{
 							evt: 1,
 							tickets: [{ id: 1, evtId: 1, price: 103.45 }, { id: 2, evtId: 1, price: 100.20 }],
+							x: 0,
+							y: 0,
 							cheapest: { id: 2, evtId: 1, price: 100.20 },
 							distance: 0
 						},
 						{
 							evt: 2,
 							tickets: [{ id: 1, evtId: 2, price: 140.22 }],
+							x: 0,
+							y: 1,
 							cheapest: { id: 1, evtId: 2, price: 140.22 },
 							distance: 1
 						},
 						{
 							evt: 3,
 							tickets: [{ id: 1, evtId: 3, price: 175.87 }],
+							x: 1,
+							y: 0,
 							cheapest: { id: 1, evtId: 3, price: 175.87 },
 							distance: 1
 						}

@@ -55,7 +55,7 @@ const findCheapestEvents = ({ world, search }) => max => ([x, y]) => {
 		ret = []
 	while (ret.length < max && dist <= maxdist) {
 		const nodes = currentSearch(dist)
-		const events = nodes.map(([x, y]) => world[x][y])
+		const events = nodes.map(([x, y]) => world[x][y] && Object.assign({}, world[x][y], { x, y }))
 			.filter(x => x !== undefined && x.tickets.length > 0)
 			.map(x => Object.assign({}, x, {
 				cheapest: x.tickets.reduce((ret, x) => (ret === undefined || x.price < ret.price) ? x : ret),
