@@ -1,23 +1,25 @@
 {
-  "name": "extraterrestrial",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/junjchen/extraterrestrial.git",
-  "author": "junjchen <chuckjunjchen@gmail.com>",
-  "license": "MIT",
-  "scripts": {
-    "build": "babel src -d lib",
-    "test": "mocha --compilers js:babel-core/register"
-  },
-  "dependencies": {
-    "prompt": "^1.0.0"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.23.0",
-    "babel-core": "^6.23.1",
-    "babel-preset-es2015": "^6.22.0",
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0",
-    "sinon": "^1.17.7"
-  }
+	"name": "extraterrestrial",
+	"version": "1.0.0",
+	"main": "index.js",
+	"repository": "https://github.com/junjchen/extraterrestrial.git",
+	"author": "junjchen <chuckjunjchen@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"build": "babel src -d lib",
+		"bundle": "npm run build && browserify index.js --standalone EventFinderFactory --outfile ./docs/eff.js",
+		"test": "mocha --compilers js:babel-core/register"
+	},
+	"dependencies": {
+		"prompt": "^1.0.0"
+	},
+	"devDependencies": {
+		"babel-cli": "^6.23.0",
+		"babel-core": "^6.23.1",
+		"babel-preset-es2015": "^6.22.0",
+		"browserify": "^14.1.0",
+		"chai": "^3.5.0",
+		"mocha": "^3.2.0",
+		"sinon": "^1.17.7"
+	}
 }

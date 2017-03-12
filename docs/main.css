@@ -1,0 +1,38 @@
+.boxes {
+	display: flex;
+	flex-direction: column;
+}
+
+.boxes__row {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.boxes__cell {
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	margin: 5px;
+	background-color: #B0BEC5;
+}
+
+.boxes__cell--origin {
+	background-color: #F06292;
+}
+
+.boxes__cell--highlight {
+	background-color: #7986CB;
+}
+
+.boxes__cell--origin.boxes__cell--highlight {
+	background-color: #F06292;
+	width: 15px;
+	height: 15px;
+	border: solid 5px #7986CB;
+}
+
+.boxes__cell:hover {
+	cursor: pointer;
+	background-color: #F8BBD0;
+}
