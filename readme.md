@@ -8,7 +8,13 @@ Is an event finder made by **JunJie Chen** for **Viagogo** with :alien:
 - To work with a big world size, there will be 2 bottlenecks , namely space and time complexity
     - Space complexity can be reduced by avoid intermediate variables being created
     - Time complexity can be reduced by using an more efficient datastructure (probably it will be better using graph to orchestrate events, that can do a quicker search-by-distance)
-- Some work can still be done includes static code check, integration test, and continues integration
+- Some work can still be done:
+    - static code check
+    - test coverage
+    - integration test
+    - continues integration
+    - autoprefix css
+    - minify css and js
 
 ## Run
 
