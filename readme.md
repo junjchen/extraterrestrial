@@ -16,12 +16,14 @@ Is an event finder made by **JunJie Chen** for **Viagogo** with :alien:
     - autoprefix css
     - minify css and js
 
-## Run
+## Run as cli
 
 1. clone this repo
 2. `yarn install --production` (or `npm install --production`)
 3. run `node ./lib/cli.js`
 
-## Demo
+![](cli-demo.gif)
 
-A [demo](https://junjchen.github.io/extraterrestrial) web page is created for visualization
+## Web demo
+
+A web [demo](https://junjchen.github.io/extraterrestrial) web page is created for visualization
