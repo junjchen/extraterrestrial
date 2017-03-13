@@ -35,11 +35,11 @@ get([
 		description: 'Number of events to return',
 		default: 5
     }
-], (err, { x0, x1, y0, y1, max }) => {
+], (err, input) => {
 	if (err) {
-		console.error(err)
-		return
+		//ignore
 	} else {
+		const { x0, x1, y0, y1, max } = input
 		const eventFinder = eventFinderFactory({ x0, x1, y0, y1, max })
 		const listen = () => {
 			get([{
@@ -57,10 +57,11 @@ get([
 					description: 'origin coordinate\'s y',
 					conform: y => (y >= y0 && y <= y1),
 					default: 0
-        }], (err, { x, y }) => {
+        }], (err, input) => {
 				if (err) {
 					//ignore
 				} else {
+					const { x, y } = input
 					const events = eventFinder([x, y])
 					console.log(events.map(({ name, cheapest, distance }) => `${name} ${cheapest.price}, Distance ${distance}`))
 					listen()
